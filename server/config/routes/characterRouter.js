@@ -1,15 +1,15 @@
 const express = require('express');
-const path = require('path');
+const Character = require('../../public/src/models/character');
+//const path = require('path');
 
 const router = express.Router();
 
-const Character = require('../public/src/models/character');
-const viewsPath = path.join(__dirname, '..', 'public', 'views');
+//const viewsPath = path.join(__dirname, '..', 'public', 'views');
 
-router.get("/", (req, res) => {
-    //res.send("Welcome To My Star Wars Rest API! You have opened a GET request to the homepage.");
-    res.sendFile('index.html', {root : viewsPath});
-});
+// router.get("/", (req, res) => {
+//     //res.send("Welcome To My Star Wars Rest API! You have opened a GET request to the homepage.");
+//     res.sendFile('index.html', {root : viewsPath});
+// });
 
 // GET ALL
 router.get("/characters", async (req, res) => {

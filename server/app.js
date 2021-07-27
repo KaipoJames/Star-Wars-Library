@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const router = require('./config/routes');
+const router = require('./config/routes/router');
 
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
