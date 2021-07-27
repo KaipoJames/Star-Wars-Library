@@ -21,13 +21,17 @@ export default function CreateCharacter() {
     mass: '',
     height: '',
     species: '',
-    home_planet: ''
+    homeworld: ''
   });
 
   const createCharacter = () => {
     // use axios to send data from front-end to back-end
     console.log(character);
-    axios.post('http://localhost:5000/create-character', character);
+    axios.post('http://localhost:5000/create-character', character) // see the post request in characterRouter.js
+    .then(() => {
+      window.location.reload(false)
+    });
+
   }
 
   return (
@@ -46,8 +50,8 @@ export default function CreateCharacter() {
       <TextField id="outlined-basic" label="Species" variant="outlined" value={character.species} onChange={(e) => {
         setCharacter({ ...character, species: e.target.value });
       }} />
-      <TextField id="outlined-basic" label="Home Planet" variant="outlined" value={character.home_planet} onChange={(e) => {
-        setCharacter({ ...character, home_planet: e.target.value });
+      <TextField id="outlined-basic" label="Home Planet" variant="outlined" value={character.homeworld} onChange={(e) => {
+        setCharacter({ ...character, homeworld: e.target.value });
       }} />
       <Button variant="contained" color="primary" onClick={createCharacter}>Create</Button>
     </form>

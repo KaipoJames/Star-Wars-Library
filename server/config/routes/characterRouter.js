@@ -93,7 +93,7 @@ router.delete('/characters/:_id', async (req, res) => {
     character ? res.send(character) : res.send("Character Does Not Exist");
 
     character.deleteOne({ _id: req.params._id });
-    res.send("Character Delete Successfully");
+    res.send("Character Deleted Successfully");
 });
 
 module.exports = router;

@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,20 +17,22 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function BasicTable() {
+export default function ShowCharacter() {
   const classes = useStyles();
+
+  const [charactersList, setCharactersList] = useState([]);
+
+  const deleteCharacter = (id) => {
+    axios.delete(`http://localhost:5000/characters/${id}`).then(() => {
+      window.location.reload(false);
+    });
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/characters').then((allCharacters) => {
+      setCharactersList(allCharacters.data);
+    });
+  }, []);
 
   return (
     <>
@@ -38,21 +43,26 @@ export default function BasicTable() {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align="right">Height</TableCell>
-            <TableCell align="right">Weight</TableCell>
+            <TableCell align="right">Mass</TableCell>
             <TableCell align="right">Species</TableCell>
-            <TableCell align="right">Home Planet</TableCell>
+            <TableCell align="right">Action</TableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {charactersList.map((character, key) => (
+            <TableRow key={key}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {character.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{character.height}</TableCell>
+              <TableCell align="right">{character.mass}</TableCell>
+              <TableCell align="right">{character.species}</TableCell>
+              <TableCell align="right">
+                <IconButton aria-label="delete" className={classes.margin} onClick={() => deleteCharacter(character._id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
