@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
@@ -9,6 +10,7 @@ const router = require('./config/routes/router');
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
 app.use(express.static("public/"));
+app.use(cors());
 
 app.use("/", router);
 
