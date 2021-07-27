@@ -2,12 +2,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const path = require("path");
 
 const app = express();
 const router = require('./config/routes');
 
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
+app.use(express.static("public/"));
+
+console.log(__dirname);
+app.set("views", path.join(__dirname, "/public/views"));
+app.set("view engine", "html");
 
 app.use("/", router);
 
