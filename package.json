@@ -1,29 +1,20 @@
 {
-  "name": "star-wars-libray-kaipo",
+  "name": "star-wars-library",
   "version": "1.0.0",
-  "description": "Star Wars Library is a Full-Stack MERN project showcasing a library of star wars characters, worlds, specices, and more. Currently, only characters functionality is available until future updates where other models will be added.",
+  "description": "",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KaipoJames/Star-Wars-Rest-API.git"
+  "scripts": {
+    "start": "concurrently \"cd client && npm start\" \"nodemon app.js\""
   },
   "keywords": [],
   "author": "Kaipo Wilmeth <kaipojames12@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KaipoJames/Star-Wars-Rest-API/issues"
-  },
-  "homepage": "https://github.com/KaipoJames/Star-Wars-Rest-API#readme",
-  "scripts": {
-    "start": "concurrently \"cd server && npm install && npm start\" \"cd client && npm install && npm start\" "
-  },
   "dependencies": {
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.3",
-    "nodemon": "^2.0.12",
-    "path": "^0.12.7"
+    "nodemon": "^2.0.12"
   }
 }
