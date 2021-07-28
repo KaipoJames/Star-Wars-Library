@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/KaipoJames/Star-Wars-Rest-API#readme",
   "scripts": {
-    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\" "
+    "start": "concurrently \"cd server && npm install && npm start\" \"cd client && npm install && npm start\" "
   },
   "dependencies": {
     "concurrently": "^6.2.0",
