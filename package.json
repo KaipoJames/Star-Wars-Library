@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-front-end": "cd server && npm start",
-    "start-back-end": "cd client && npm start",
-    "start": "npm run start-front-end && npm run start-back-end"
+    "start-back-end": "cd client && npm start"
   },
   "repository": {
     "type": "git",
