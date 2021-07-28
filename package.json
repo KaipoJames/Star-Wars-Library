@@ -20,9 +20,7 @@
   },
   "homepage": "https://github.com/KaipoJames/Star-Wars-Rest-API#readme",
   "dependencies": {
+    "concurrently": "^6.2.0",
     "nodemon": "^2.0.12"
-  },
-  "devDependencies": {
-    "concurrently": "^6.2.0"
   }
 }
