@@ -5,7 +5,7 @@ Currently, only characters functionality is available until future updates where
 
 ### Deployment for this application is underway. Check back tomorrow for updates!
 
-Heroku
+Heroku Deploy
   
 ## Database Storage
   - All models are stored as documents in an active cluster contained in the non-relational database known as MongoDB.
