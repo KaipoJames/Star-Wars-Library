@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "Star Wars Library is a Full-Stack MERN project showcasing a library of star wars characters, worlds, specices, and more. Currently, only characters functionality is available until future updates where other models will be added.",
   "main": "index.js",
-  "scripts": {
-    "start-front-end": "cd server && npm start",
-    "start-back-end": "cd client && npm start",
-    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\" "
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KaipoJames/Star-Wars-Rest-API.git"
@@ -19,6 +14,11 @@
     "url": "https://github.com/KaipoJames/Star-Wars-Rest-API/issues"
   },
   "homepage": "https://github.com/KaipoJames/Star-Wars-Rest-API#readme",
+  "scripts": {
+    "start-front-end": "cd server && npm start",
+    "start-back-end": "cd client && npm start",
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\" "
+  },
   "dependencies": {
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
