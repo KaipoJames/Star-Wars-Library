@@ -1,8 +1,12 @@
 // DEPENDENCIES
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
-require('dotenv').config();
+
+const envPath = path.join(__dirname, '..', '.env');
+console.log(envPath);
+require('dotenv').config({ path: envPath });
 
 const app = express();
 const router = require('./config/routes/router');

@@ -23,3 +23,4 @@ Currently, only characters functionality is available until future updates where
  - heroku ps:restart web -a (app-name) 
  - heroku apps
  - heroku apps:rename (new-name)
+ - sudo killall -9 node
