@@ -1,24 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+const columns = [
+  { id: 'name', label: 'Name', minWidth: 150 },
+  { id: 'height', label: 'Height', minWidth: 80 },
+  {
+    id: 'mass',
+    label: 'Mass',
+    minWidth: 80,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'species',
+    label: 'Species',
+    minWidth: 80,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'action',
+    label: 'Action',
+    minWidth: 80,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
+];
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
+  root: {
+    width: '100%',
+  },
+  container: {
+    maxHeight: 440,
   },
 });
 
-export default function ShowCharacter() {
+export default function StickyHeadTable() {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const [charactersList, setCharactersList] = useState([]);
 
@@ -27,10 +67,9 @@ export default function ShowCharacter() {
 
   const deleteCharacter = (id) => {
     axios.delete(deleteCharacterAPI(id)).then(() => {
-      location.reload(false);
+      window.location.reload(false);
     });
   }
-
   useEffect(() => {
     axios.get(getCharactersAPI).then((allCharacters) => {
       setCharactersList(allCharacters.data);
@@ -38,39 +77,60 @@ export default function ShowCharacter() {
   }, []);
 
   return (
-    <>
-    <h2>All Characters</h2>
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Height</TableCell>
-            <TableCell align="right">Mass</TableCell>
-            <TableCell align="right">Species</TableCell>
-            <TableCell align="right">Action</TableCell>
-
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {charactersList.map((character, key) => (
-            <TableRow key={key}>
-              <TableCell component="th" scope="row">
-                {character.name}
-              </TableCell>
-              <TableCell align="right">{character.height}</TableCell>
-              <TableCell align="right">{character.mass}</TableCell>
-              <TableCell align="right">{character.species}</TableCell>
-              <TableCell align="right">
-                <IconButton aria-label="delete" className={classes.margin} onClick={() => deleteCharacter(character._id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
+    <Paper className={classes.root}>
+      <TableContainer className={classes.container}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </>
+          </TableHead>
+          <TableBody>
+            {charactersList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((character) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={character.code}>
+                  {columns.map((column) => {
+                    const value = character[column.id];
+                    if (column.id === 'action') {
+                      return(
+                        <>
+                          <TableCell key={column.id} align={column.align}>
+                            <IconButton aria-label="delete" className={classes.margin} onClick={() => deleteCharacter(character._id)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </TableCell>
+                        </>
+                      )
+                    }
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={charactersList.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }
