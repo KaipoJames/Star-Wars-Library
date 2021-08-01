@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
-app.use(express.static("public/"));
+//app.use(express.static("public/"));
 app.use(cors());
 
 app.use("/", router);

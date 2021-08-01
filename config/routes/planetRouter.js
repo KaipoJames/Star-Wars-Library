@@ -1,5 +1,5 @@
 const express = require('express');
-const Planet = require('../../public/src/models/planet');
+const Planet = require('../../src/models/planet');
 
 const router = express.Router();
 

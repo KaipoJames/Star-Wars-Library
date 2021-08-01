@@ -1,5 +1,5 @@
 const express = require('express');
-const Character = require('../../public/src/models/character');
+const Character = require('../../src/models/character');
 //const path = require('path');
 
 const router = express.Router();
