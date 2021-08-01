@@ -9,7 +9,6 @@ const starshipsRouter = require('./starshipRouter');
 const vehicleRouter = require('./vehicleRouter.js');
 
 const viewsPath = path.join(__dirname, '..', '..', 'public', 'views');
-console.log(reactPath);
 
 router.get("/", (req, res) => {
     //res.send("Welcome To My Star Wars Rest API! You have opened a GET request to the homepage.");
