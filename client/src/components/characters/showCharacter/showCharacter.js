@@ -27,7 +27,7 @@ export default function ShowCharacter() {
 
   const deleteCharacter = (id) => {
     axios.delete(deleteCharacterAPI(id)).then(() => {
-      window.location.reload(false);
+      location.reload(false);
     });
   }
 

@@ -3,9 +3,9 @@
 Star Wars Library is a Full-Stack MERN project showcasing a library of star wars characters, worlds, specices, and more.
 Currently, only characters functionality is available until future updates where other models will be added.
 
-### Deployment for this application is underway. Check back tomorrow for updates!
+## Deployment
 
-Heroku Deploy. Dependencies
+ - View this [app](https://star-wars-library-kaipo.herokuapp.com/) on Heroku.
   
 ## Database Storage
   - All models are stored as documents in an active cluster contained in the non-relational database known as MongoDB.
