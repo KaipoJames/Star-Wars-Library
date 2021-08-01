@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const express = require('express');
 const mongoose = require('mongoose');
-//const path = require('path');
+const path = require('path');
 const cors = require('cors');
 
 //const envPath = path.join(__dirname, '..', '.env');
@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 // CONNECT TO EXPRESS SERVER, THEN TO MongoDB
 app.listen(PORT, (err, res) => {
     if (err) console.log(err);
-    console.log("Server is listening on port 5000 at: http://localhost:5000");
+    console.log("Server is listening on port 5000 at: http://localhost:" + PORT);
 
     mongoose.connect(process.env.URI, {
         useNewUrlParser: true, 
