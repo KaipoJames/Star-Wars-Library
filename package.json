@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "server": "nodemon app.js",
-    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix-client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix-client\""
+    "start": "nodemon app.js",
+    "client": "cd client && npm start",
+    "develop": "concurrently \"npm run server\" \"npm run start\"",
+    "local": "concurrently \"npm run server\" \"npm run heroku-postbuild\""
   },
   "keywords": [],
   "author": "Kaipo Wilmeth <kaipojames12@gmail.com>",
