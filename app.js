@@ -21,7 +21,12 @@ app.use("/", router);
 
 // Check if our app is running on heroku
 if (process.env.NODE_ENV === 'production') {
+    console.log("Star-Wars-Library App Detected on Heroku!");
     app.use(express.static('client/build'));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    });
 }
 
 // CONNECT TO EXPRESS SERVER, THEN TO MongoDB
