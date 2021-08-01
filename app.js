@@ -11,6 +11,7 @@ require('dotenv').config();
 const app = express();
 const router = require('./config/routes/router');
 const PORT = process.env.PORT || 5000;
+const LOG_OUTPUT = `Server is listening on port ${PORT} at: http://localhost:${PORT}`;
 
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use("/", router);
 
 // Check if our app is running on heroku
 if (process.env.NODE_ENV === 'production') {
+    LOG_OUTPUT = `Server is listening on port ${PORT} at: https://star-wars-library-kaipo.herokuapp.com/`
     console.log("Star-Wars-Library App Detected on Heroku!");
     app.use(express.static('client/build'));
 
@@ -32,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 // CONNECT TO EXPRESS SERVER, THEN TO MongoDB
 app.listen(PORT, (err, res) => {
     if (err) console.log(err);
-    console.log("Server is listening on port 5000 at: http://localhost:" + PORT);
+    console.log(LOG_OUTPUT);
 
     mongoose.connect(process.env.URI, {
         useNewUrlParser: true, 
