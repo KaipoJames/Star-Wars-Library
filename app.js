@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const app = express();
 const router = require('./config/routes/router');
-const PORT = process.end.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
