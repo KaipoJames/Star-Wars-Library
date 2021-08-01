@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateCharacter() {
   const classes = useStyles();
 
+  const createCharacterAPI = process.env.NODE_ENV === 'production' ? `https://star-wars-library-kaipo.herokuapp.com/create-character` : `http://localhost:5000/create-character`;
+
   const [character, setCharacter] = useState({ 
     name: '',
     mass: '',
@@ -27,7 +29,7 @@ export default function CreateCharacter() {
   const createCharacter = () => {
     // use axios to send data from front-end to back-end
     console.log(character);
-    axios.post('http://localhost:5000/create-character', character) // see the post request in characterRouter.js
+    axios.post(createCharacterAPI, character) // see the post request in characterRouter.js
     .then(() => {
       window.location.reload(false)
     });

@@ -22,14 +22,17 @@ export default function ShowCharacter() {
 
   const [charactersList, setCharactersList] = useState([]);
 
+  const deleteCharacterAPI = process.env.NODE_ENV === 'production' ? `https://star-wars-library-kaipo.herokuapp.com/characters/${id}` : `http://localhost:5000/characters/${id}`;
+  const getCharactersAPI = process.env.NODE_ENV === 'production' ? `https://star-wars-library-kaipo.herokuapp.com/characters` : 'http://localhost:5000/characters';
+
   const deleteCharacter = (id) => {
-    axios.delete(`http://localhost:5000/characters/${id}`).then(() => {
+    axios.delete(deleteCharacterAPI).then(() => {
       window.location.reload(false);
     });
   }
 
   useEffect(() => {
-    axios.get('http://localhost:5000/characters').then((allCharacters) => {
+    axios.get(getCharactersAPI).then((allCharacters) => {
       setCharactersList(allCharacters.data);
     });
   }, []);
