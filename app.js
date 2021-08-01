@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 const router = require('./config/routes/router');
 const PORT = process.env.PORT || 5000;
-const LOG_OUTPUT = `Server is listening on port ${PORT} at: http://localhost:${PORT}`;
+let LOG_OUTPUT = `Server is listening on port ${PORT} at: http://localhost:${PORT}`;
 
 app.use(express.urlencoded({ extended: true })); // Enable our form data to be accessed by the 'req' variable in our routes
 app.use(express.json());
