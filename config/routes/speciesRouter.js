@@ -1,5 +1,5 @@
 const express = require('express');
-const Species = require('../../src/models/species');
+const Species = require('../../public/src/models/species');
 
 const router = express.Router();
 

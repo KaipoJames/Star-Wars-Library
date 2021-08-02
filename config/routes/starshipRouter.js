@@ -1,5 +1,5 @@
 const express = require('express');
-const Starship = require('../../src/models/starship');
+const Starship = require('../../public/src/models/starship');
 
 const router = express.Router();
 
