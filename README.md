@@ -44,5 +44,3 @@ You can view the .csv files I am using in public/data-sets.
  - heroku apps:rename (new-name)
  - sudo killall -9 node
  - npx kill-port 3000 8080 4200
-
-app built by Kaipo Wilmeth
